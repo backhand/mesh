@@ -1,0 +1,3 @@
+#!/bin/sh
+
+NODE_ENV=testing node_modules/mocha/bin/mocha -t 15000 -s 100 --exit --reporter spec test/$1.test.js --grep "$2"

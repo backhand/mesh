@@ -1,0 +1,30 @@
+{
+  "name": "mesh",
+  "description": "Swarm stuff",
+  "version": "0.1.0",
+  "author": "Frederik Hannibal <frederik@backhand.dk>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/backhand/mesh.git"
+  },
+  "main": "./lib/mesh",
+  "dependencies": {
+    "@backhand/each": "0.1.2",
+    "@backhand/root": "0.1.1",
+    "commander": "2.15.1",
+    "ip": "1.1.5",
+    "log4js": "2.5.3",
+    "redis": "2.8.0"
+  },
+  "devDependencies": {
+    "sinon": "5.0.7",
+    "mocha": "5.1.1"
+  },
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha test --timeout 15000 --exit --reporter spec test"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.0.x"
+  }
+}

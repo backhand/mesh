@@ -1,0 +1,45 @@
+version: '3'
+services:
+  node1:
+    build: meshnode
+    ports:
+      - '9998:9998'
+    networks:
+      - mesh
+    links:
+      - redis
+    depends_on:
+      - redis
+    volumes:
+      - ../:/opt/mesh
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '200K'
+        max-file: '5'
+  node2:
+    build: meshnode
+    networks:
+      - mesh
+    links:
+      - redis
+    depends_on:
+      - redis
+    volumes:
+      - ../:/opt/mesh
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '200K'
+        max-file: '5'
+  redis:
+    image: redis:3.2.1
+    networks:
+      mesh:
+        ipv4_address: 10.0.0.2
+networks:
+  mesh:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
