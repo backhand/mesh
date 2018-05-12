@@ -1,4 +1,4 @@
-each
+mesh
 =======================
 
 [![Build Status](https://secure.travis-ci.org/backhand/mesh.png?branch=master)](https://travis-ci.org/backhand/mesh)
@@ -10,9 +10,8 @@ npm install @backhand/mesh
 Usage:
 ------
 ```
-    const each = require('@backhand/mesh');
-
-``
+  const mesh = require('@backhand/mesh');
+```
 
 The MIT License (MIT)
 ---------------------
