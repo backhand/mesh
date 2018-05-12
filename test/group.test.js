@@ -16,7 +16,7 @@ describe('group', function() {
     });
   }); // End describe constructor
 
-  describe('updatePeerNodes', function() {
+  describe('addPeerNode', function() {
     it('should update list of peers', async function() {
       const node = MockNode();
       const group = new mesh.Group(mesh.conf.groupName, node);
@@ -30,7 +30,7 @@ describe('group', function() {
           port: 12345
         }
       };
-      group.updatePeerNodes(newNode);
+      group.addPeerNode(newNode);
 
       assert.equal(Object.keys(group.peers).length, 1);
       assert.ok(group.peers[newNode.nodeId]);
@@ -39,26 +39,31 @@ describe('group', function() {
       await mesh.util.sleep(50);
 
       const oldLastSeen = group.peers[newNode.nodeId].lastSeen;
-      group.updatePeerNodes(newNode);
+      group.addPeerNode(newNode);
       assert.ok(group.peers[newNode.nodeId].lastSeen > oldLastSeen);
     });
-  }); // End describe updatePeerNodes
+  }); // End describe addPeerNode
 
 
-  // it('should update ', async function() {
-  //   const node = MockNode();
-  //   const group = new mesh.Group(mesh.conf.groupName, node);
 
-  //   assert.equal(group.name, mesh.conf.groupName);
-  //   assert.equal(group.node.nodeId, node.nodeId);
-  //   assert.deepEqual(group.peers, {});
-  // });
+  describe('doPeerStatus', function() {
+    it('should remove a node if not heard from after a while', async function() {
+      const node = MockNode();
+      const group = new mesh.Group(mesh.conf.groupName, node);
 
-  // handlePing
-  // pingPeers
-  // ping
-
-    // await mesh.util.sleep(5000);
-
-    // assert.ok(node.communication.send.called);
+      const newNode = {
+        nodeId: 'someNewNode',
+        address: {
+          address: '1.2.3.4',
+          port: 12345
+        }
+      };
+      group.addPeerNode(newNode);
+      assert.equal(Object.keys(group.peers).length, 1);
+      assert.ok(group.peers[newNode.nodeId]);
+      await mesh.util.sleep(3000);
+      assert.equal(Object.keys(group.peers).length, 0);
+      assert.ok(!group.peers[newNode.nodeId]);
+    });
+  }); // End describe doPeerStatus
 }); // End describe group

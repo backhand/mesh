@@ -8,6 +8,14 @@ function MockNodeFactory() {
     nodeId: mesh.util.hash.md5('local' + mesh.util.random()),
     communication: {
       send: sinon.spy()
+    },
+    discovery: {
+      
+    },
+    configuration: {
+      discovery: {
+        interval: 500
+      }
     }
   };
 }
